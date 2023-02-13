@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 
+mod vga_buffer;
+
 use core::panic::PanicInfo;
 // we have to define our own panic handler, PanicInfo parameter has the file and the line number where panic has occured
 // the function should never return, so it is marked as a diverging function return never "!" type
