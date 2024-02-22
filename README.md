@@ -10,8 +10,9 @@ TODO:
 - [x] Minimal Rust Kernel
 - [x] VGA Text Mode
 - [x] Testing
-- [ ] Interrupt Handlers
-- [ ] Catching Double Faults
+- [x] Interrupt Handlers
+- [ ] Handling Exceptions with Naked Functions (without x86_64 crate...optional)
+- [x] Catching Double Faults
 - [ ] Hardware Interrupts
 - [ ] Paging
 - [ ] Heap

@@ -15,9 +15,32 @@ pub extern "C" fn _start() -> ! {
     
     println!("Hello World{}", "!");
 
+    mOS::init();
+
+
+    // trigger a page fault for a page which is not mapped to a physical page 
+    // if double fault handler is not present it will trigger a triple fault 
+    // which causes a system reset in most architectures
+
+    // unsafe {
+    //     *(0xdeadbeef as *mut u8) = 42;
+    // };
+
+
+    // x86_64::instructions::interrupts::int3();
+
+
+    // trigger a stack overflow exception
+    fn stackoverflow() {
+        stackoverflow();
+    }
+    
+    stackoverflow();
 
     #[cfg(test)]
     test_main();
+
+    println!("It didn't crash...");
 
     loop {}
 }
