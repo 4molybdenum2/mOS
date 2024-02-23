@@ -13,7 +13,7 @@ TODO:
 - [x] Interrupt Handlers
 - [ ] Handling Exceptions with Naked Functions (without x86_64 crate...optional)
 - [x] Catching Double Faults
-- [ ] Hardware Interrupts
+- [x] Hardware Interrupts
 - [ ] Paging
 - [ ] Heap
 - [ ] Allocator designs

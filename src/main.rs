@@ -31,19 +31,20 @@ pub extern "C" fn _start() -> ! {
 
 
     // trigger a stack overflow exception
-    fn stackoverflow() {
-        stackoverflow();
-    }
+    // fn stackoverflow() {
+    //     stackoverflow();
+    // }
     
-    stackoverflow();
+    // stackoverflow();
 
     #[cfg(test)]
     test_main();
 
     println!("It didn't crash...");
 
-    loop {}
+    mOS::hlt_loop();
 }
+
 
 
 // we have to define our own panic handler, PanicInfo parameter has the file and the line number where panic has occured
@@ -53,7 +54,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    mOS::hlt_loop();
 }
 
 #[cfg(test)]

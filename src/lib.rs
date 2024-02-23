@@ -15,6 +15,8 @@ use core::panic::PanicInfo;
 pub fn init() {
     gdt::init();
     interrupt::init_idt();
+    unsafe { interrupt::PICS.lock().initialize() };
+    x86_64::instructions::interrupts::enable();  // gets timer interrupts by default
 }
 
 pub trait Testable {
@@ -44,7 +46,8 @@ pub fn test_panic_handler(info: &PanicInfo) -> ! {
     serial_println!("[failed]\n");
     serial_println!("Error: {}\n", info);
     exit_qemu(QemuExitCode::Failure);
-    loop {}
+    
+    hlt_loop();
 }
 
 /// Entry point for `cargo test`
@@ -53,7 +56,8 @@ pub fn test_panic_handler(info: &PanicInfo) -> ! {
 pub extern "C" fn _start() -> ! {
     init();
     test_main();
-    loop {}
+    
+    hlt_loop();
 }
 
 #[cfg(test)]
@@ -87,3 +91,11 @@ The functionality of the isa-debug-exit device is very simple. When a value is w
 it causes QEMU to exit with exit status (value << 1) | 1. So when we write 0 to the port,QEMU will exit with exit status 
 (0 << 1) | 1 = 1, and when we write 1 to the port, it will exit with exit status (1 << 1) | 1 = 3.
 */
+
+
+
+pub fn hlt_loop() -> ! {
+    loop {
+        x86_64::instructions::hlt();
+    }
+}
