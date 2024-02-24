@@ -17,6 +17,10 @@ pub extern "C" fn _start() -> ! {
 
     mOS::init();
 
+    use x86_64::registers::control::Cr3;
+
+    let (level_4_page_table, _) = Cr3::read();
+    println!("Level 4 page table at: {:?}", level_4_page_table.start_address());
 
     // trigger a page fault for a page which is not mapped to a physical page 
     // if double fault handler is not present it will trigger a triple fault 
@@ -36,6 +40,11 @@ pub extern "C" fn _start() -> ! {
     // }
     
     // stackoverflow();
+
+    let ptr = 0xdeadbeaf as *mut u8;
+    unsafe { *ptr = 42; }
+
+        
 
     #[cfg(test)]
     test_main();

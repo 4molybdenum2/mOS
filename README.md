@@ -14,7 +14,7 @@ TODO:
 - [ ] Handling Exceptions with Naked Functions (without x86_64 crate...optional)
 - [x] Catching Double Faults
 - [x] Hardware Interrupts
-- [ ] Paging
+- [x] Paging
 - [ ] Heap
 - [ ] Allocator designs
 - [ ] Async/Await
@@ -25,3 +25,4 @@ Other Implementations that are not in this course:
 - [ ] File systems
 - [ ] Schedulers (?)
 - [ ] User mode programs
+- [ ] Graphics mode
